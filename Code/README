@@ -1,90 +1,167 @@
-# 🧠 Image Classification Pipeline Using Moment Features, PCA/ICA, and k-NN
-
-This repository contains MATLAB scripts for a complete pipeline to classify grayscale imagesusing image preprocessing, feature extraction (Legendre Moments, PCA, ICA), and classification via the k-Nearest Neighbors (k-NN) algorithm.
 
 ---
 
-## 📁 Pipeline Overview
+## Improved `code/README.md`
 
-The pipeline consists of **four main stages**, each handled by a separate script:
+This is the polished version of the README you already had.
 
----
+```markdown
+# Image Classification Pipeline Using Moment Features, PCA/ICA, and k-NN
 
-### 1. Image Preprocessing  
-**Script:** `image_preprocessing.m`  
-**Purpose:**  
-- Apply a global threshold to grayscale images to reduce intraclass variance  
-- Divide each image into 25 equal-sized sub-images (5×5 grid)  
-- Save each sub-image individually for feature extraction
+This folder contains MATLAB scripts for the image-processing and machine-learning pipeline used to classify grayscale tracking-plate images.
 
----
+The workflow combines image preprocessing, feature extraction using Legendre Moments, PCA and ICA, and classification using the k-nearest neighbors algorithm.
 
-### 2. Feature Extraction – Legendre Moments  
-**Script:** `extract_legendre_moments.m` and `LM.m`
-**Purpose:**  
-- Compute Legendre Moments up to user-defined orders  
-- Save feature vectors with appended class labels to `.mat` files
+## Pipeline overview
+
+The pipeline has five main stages.
 
 ---
 
-### 3. Feature Extraction – PCA/ICA  
-**Script:** `pca_ica_feature_extraction.m`  
-**Purpose:**  
-- Compute PCA and ICA
-- Apply:
-  - **PCA** to retain all variance or 95% variance
-  - **ICA** to extract 100 independent components  
-- Save PCA scores, ICA mixing matrix, and variance information  
+## 1. Image preprocessing
+
+**Script:** `image_preprocessing.m`
+
+### Purpose
+
+This script prepares the grayscale image data for feature extraction and classification.
+
+Main steps:
+
+- applies a global threshold to grayscale images;
+- reduces intraclass variation in the image set;
+- divides each image into 25 equal-sized sub-images using a 5 × 5 grid;
+- saves each sub-image individually for later feature extraction.
+
+### Main output
+
+- preprocessed sub-images saved as `.jpg` files.
 
 ---
 
-### 4. Classification – k-NN (Varying Features)  
-**Script:** `knn_classification_features.m`  
-**Purpose:**  
-- Perform k-NN classification on ICA, PCA, and LM-derived features  
-- Iterate over different **numbers of features**  
-- Output performance metrics:
-  - Accuracy  
-  - Sensitivity  
-  - Specificity  
-  - Classification Loss  
-  - Mean Squared Error (MSE)  
-- **Generates Figure 4**
+## 2. Feature extraction using Legendre Moments
+
+**Scripts:**  
+`extract_legendre_moments.m`  
+`LM.m`
+
+### Purpose
+
+These scripts compute Legendre Moment features from the preprocessed image regions.
+
+Main steps:
+
+- computes Legendre Moments up to user-defined orders;
+- extracts numerical feature vectors from each image or sub-image;
+- appends class labels to the feature matrix;
+- saves the resulting features in `.mat` files.
+
+### Main output
+
+- Legendre Moment feature matrices;
+- feature vectors with associated class labels.
 
 ---
 
-### 5. Classification – k-NN (Varying Training Size)  
-**Script:** `knn_classification_trainingsize.m`  
-**Purpose:**  
-- Perform k-NN classification using different **training sizes**
-- Output same performance metrics as above  
-- Plot **ROC curves at 80% training size**  
-- **Generates Figures 5 and 6**
+## 3. Feature extraction using PCA and ICA
+
+**Script:** `pca_ica_feature_extraction.m`
+
+### Purpose
+
+This script applies dimensionality reduction and feature extraction using Principal Component Analysis and Independent Component Analysis.
+
+Main steps:
+
+- computes PCA-based image features;
+- retains either all variance or 95% of variance, depending on the selected configuration;
+- computes ICA-based features;
+- extracts 100 independent components;
+- saves PCA scores, ICA components, and explained variance information.
+
+### Main output
+
+- PCA feature matrices;
+- ICA feature matrices;
+- explained variance information;
+- saved `.mat` files for downstream classification.
 
 ---
 
-## 🗂 Output Summary
+## 4. k-NN classification using varying numbers of features
 
-- Sub-images (`.jpg`)  
-- Legendre Moments, PCA, and ICA features
-- Classification performance metrics  
-- Plots (ROC curves, accuracy trends)  
+**Script:** `knn_classification_features.m`
+
+### Purpose
+
+This script evaluates classification performance using different numbers of features.
+
+Main steps:
+
+- performs k-nearest neighbors classification;
+- compares ICA-, PCA-, and Legendre Moment-derived features;
+- iterates over different numbers of selected features;
+- computes classification performance metrics.
+
+### Metrics generated
+
+- accuracy;
+- sensitivity;
+- specificity;
+- classification loss;
+- mean squared error.
+
+### Main output
+
+- performance tables;
+- classification plots;
+- figure corresponding to the feature-number analysis.
+
+This script generates the results associated with **Figure 4** of the study.
 
 ---
 
-## ✅ Suggested Workflow
+## 5. k-NN classification using varying training sizes
 
-1. **Preprocess Images**  
-   `→` Run `image_preprocessing.m`  
-2. **Extract Features (Legendre, PCA, ICA)**  
-   `→` Run `extract_legendre_moments.m` + `LM.m` and `pca_ica_feature_extraction.m`  
-3. **Classify & Evaluate**  
-   `→` Run `knn_classification_features.m` and `knn_classification_trainingsize.m`  
+**Script:** `knn_classification_trainingsize.m`
+
+### Purpose
+
+This script evaluates model performance across different training-set sizes.
+
+Main steps:
+
+- performs k-nearest neighbors classification using different proportions of training data;
+- evaluates performance across training-size configurations;
+- generates ROC curves at 80% training size;
+- compares classification performance across feature-extraction methods.
+
+### Metrics generated
+
+- accuracy;
+- sensitivity;
+- specificity;
+- classification loss;
+- mean squared error;
+- ROC curves.
+
+### Main output
+
+- performance tables;
+- ROC curves;
+- classification figures.
+
+This script generates the results associated with **Figures 5 and 6** of the study.
 
 ---
 
-## 🧩 Requirements
+## Suggested script order
 
-- MATLAB (R2020a or later recommended)  
-- Image Processing Toolbox  
-- Custom Legendre Moment functions (`LM.m`)
+Run the scripts in the following order:
+
+```matlab
+image_preprocessing
+extract_legendre_moments
+pca_ica_feature_extraction
+knn_classification_features
+knn_classification_trainingsize
