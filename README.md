@@ -47,13 +47,7 @@ rodent-surveillance-machine-learning/
 │   ├── extract_legendre_moments.m
 │   ├── LM.m
 │   ├── pca_ica_feature_extraction.m
-.m
-│
-├── data/
 │   └── README.md
 │
-├── results/
-│   └── README.md
-│
-└── docs/
-    └── methods_summary.md
+└── data/
+    └── README.md
