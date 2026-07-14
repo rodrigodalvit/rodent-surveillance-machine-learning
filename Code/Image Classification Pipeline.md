@@ -1,0 +1,90 @@
+# 🧠 Image Classification Pipeline Using Moment Features, PCA/ICA, and k-NN
+
+This repository contains MATLAB scripts for a complete pipeline to classify grayscale imagesusing image preprocessing, feature extraction (Legendre Moments, PCA, ICA), and classification via the k-Nearest Neighbors (k-NN) algorithm.
+
+---
+
+## 📁 Pipeline Overview
+
+The pipeline consists of **four main stages**, each handled by a separate script:
+
+---
+
+### 1. Image Preprocessing  
+**Script:** `image_preprocessing.m`  
+**Purpose:**  
+- Apply a global threshold to grayscale images to reduce intraclass variance  
+- Divide each image into 25 equal-sized sub-images (5×5 grid)  
+- Save each sub-image individually for feature extraction
+
+---
+
+### 2. Feature Extraction – Legendre Moments  
+**Script:** `extract_legendre_moments.m` and `LM.m`
+**Purpose:**  
+- Compute Legendre Moments up to user-defined orders  
+- Save feature vectors with appended class labels to `.mat` files
+
+---
+
+### 3. Feature Extraction – PCA/ICA  
+**Script:** `pca_ica_feature_extraction.m`  
+**Purpose:**  
+- Compute PCA and ICA
+- Apply:
+  - **PCA** to retain all variance or 95% variance
+  - **ICA** to extract 100 independent components  
+- Save PCA scores, ICA mixing matrix, and variance information  
+
+---
+
+### 4. Classification – k-NN (Varying Features)  
+**Script:** `knn_classification_features.m`  
+**Purpose:**  
+- Perform k-NN classification on ICA, PCA, and LM-derived features  
+- Iterate over different **numbers of features**  
+- Output performance metrics:
+  - Accuracy  
+  - Sensitivity  
+  - Specificity  
+  - Classification Loss  
+  - Mean Squared Error (MSE)  
+- **Generates Figure 4**
+
+---
+
+### 5. Classification – k-NN (Varying Training Size)  
+**Script:** `knn_classification_trainingsize.m`  
+**Purpose:**  
+- Perform k-NN classification using different **training sizes**
+- Output same performance metrics as above  
+- Plot **ROC curves at 80% training size**  
+- **Generates Figures 5 and 6**
+
+---
+
+## 🗂 Output Summary
+
+- Sub-images (`.jpg`)  
+- Legendre Moments, PCA, and ICA features
+- Classification performance metrics  
+- Plots (ROC curves, accuracy trends)  
+
+---
+
+## ✅ Suggested Workflow
+
+1. **Preprocess Images**  
+   `→` Run `image_preprocessing.m`  
+2. **Extract Features (Legendre, PCA, ICA)**  
+   `→` Run `extract_legendre_moments.m` + `LM.m` and `pca_ica_feature_extraction.m`  
+3. **Classify & Evaluate**  
+   `→` Run `knn_classification_features.m` and `knn_classification_trainingsize.m`  
+
+---
+
+## 🧩 Requirements
+
+- MATLAB (R2020a or later recommended)  
+- Image Processing Toolbox  
+- Custom Legendre Moment functions (`LM.m`)
