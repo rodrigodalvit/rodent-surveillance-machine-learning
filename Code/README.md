@@ -1,9 +1,7 @@
 
 ---
 
-## Improved `code/README.md`
-
-This is the polished version of the README you already had.
+## `code/README.md`
 
 ```markdown
 # Image Classification Pipeline Using Moment Features, PCA/ICA, and k-NN
