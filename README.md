@@ -14,7 +14,7 @@ The goal of this repository is to make the computational workflow easier to insp
 
 ## Graphical summary
 
-![Graphical summary of the machine-learning workflow for rodent tracking-plate surveillance](graphical_summary.png)
+![Graphical summary of the machine-learning workflow for rodent tracking-plate surveillance](overview.png)
 
 ## Methods included
 
