@@ -12,6 +12,10 @@ This project applies image-processing and machine-learning methods to classify g
 
 The goal of this repository is to make the computational workflow easier to inspect, reuse, and cite.
 
+## Graphical summary
+
+![Graphical summary of the machine-learning workflow for rodent tracking-plate surveillance](graphical_summary.png)
+
 ## Methods included
 
 The repository includes MATLAB scripts for:
