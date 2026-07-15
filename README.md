@@ -31,7 +31,6 @@ The repository includes MATLAB scripts for:
 rodent-surveillance-machine-learning/
 │
 ├── README.md
-├── DATA_AVAILABILITY.md
 ├── LICENSE
 │
 ├── code/
